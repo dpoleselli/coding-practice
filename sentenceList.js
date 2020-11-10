@@ -1,13 +1,14 @@
 function sentenceList(dictionary, sentence) {
 	if(!sentence || !dictionary) { return null } 
 
-	result = []
-	word = ''
+	let result = []
+	let word = ''
 
 	for(let i = 0; i < sentence.length; i++) {
 		word += sentence[i]
 		if(dictionary.includes(word)) {
 			result.push(word)
+			dictionary.splice(dictionary.indexOf(word), 1)
 			word = ''
 		}
 	}
@@ -59,6 +60,11 @@ console.log(equal(result, answer) ? 'Passed'
 
 result = sentenceList(['Capital', 'With', 'works', 'Letters', 'Extra', 'with'], 'worksWithCapitalLetters')
 answer = ['works', 'With', 'Capital', 'Letters']
+console.log(equal(result, answer) ? 'Passed' 
+	: `Failed: expected ${answer}, but got ${result}`)
+
+result = sentenceList(['not', 'enough', 'repeats'], 'repeatsnotenoughrepeats')
+answer = null
 console.log(equal(result, answer) ? 'Passed' 
 	: `Failed: expected ${answer}, but got ${result}`)
 
